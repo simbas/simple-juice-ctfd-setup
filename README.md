@@ -11,6 +11,18 @@ features:
 ## How to use
 
 ```shell
-docker-compose up --force-recreate --remove-orphans --build
+docker-compose up
 docker-compose rm -s -f
+```
+
+Paramaters (port, credentials, etc. check the `docker-compose.yml` file) are passed as environment variables: 
+```shell
+CTF_PORT=8080 CTF_PASSWORD=secretpassword docker-compose up
+```
+
+
+dev mode:
+
+```shell
+docker-compose  -f docker-compose.yml -f docker-compose.dev.yml up --force-recreate --remove-orphans --build
 ```

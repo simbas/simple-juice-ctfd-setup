@@ -1,0 +1,9 @@
+version: '2.1'
+
+services:
+  db:
+    volumes:
+    - "/var/lib/mysql"
+
+  bootstrapper:
+    build: ./bootstrapper

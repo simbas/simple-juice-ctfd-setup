@@ -1,11 +1,11 @@
-version: '2'
+version: '2.1'
 
 services:
   ctfd:
     image: ctfd/ctfd:version-1.1.2
     restart: always
     ports:
-    - "80:8000"
+    - "${CTF_PORT:-80}:8000"
     environment:
       DATABASE_URL: mysql+pymysql://root:ctfd@db/ctfd
     links:
@@ -17,9 +17,11 @@ services:
       MYSQL_ROOT_PASSWORD: ctfd
       MYSQL_USER: ctfd
       MYSQL_PASSWORD: ctfd
+    volumes:
+    - ${CTF_PATH:-./data}/mysql:/var/lib/mysql
 
   bootstrapper:
-    build: ./bootstrapper
-    command: -u http://ctfd:8000 -n admin -p admin -c JUICECTF -d mycompany.net
+    image: simbas/sjcs-bootstrapper:latest
+    command: -u http://ctfd:8000 -n ${CTF_USER:-admin} -p ${CTF_PASSWORD:-admin123} -c ${CTF_NAME:-JuiceCTF} -d ${CTF_DOMAIN:-mycompany.net}
     links:
     - ctfd
