@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  ctfd:
+    image: ctfd/ctfd:version-1.1.2
+    restart: always
+    ports:
+    - "80:8000"
+    environment:
+      DATABASE_URL: mysql+pymysql://root:ctfd@db/ctfd
+    links:
+    - db
+
+  db:
+    image: mariadb:10.2
+    environment:
+      MYSQL_ROOT_PASSWORD: ctfd
+      MYSQL_USER: ctfd
+      MYSQL_PASSWORD: ctfd
+
+  bootstrapper:
+    build: ./bootstrapper
+    command: -u http://ctfd:8000 -n admin -p admin -c JUICECTF -d mycompany.net
+    links:
+    - ctfd
