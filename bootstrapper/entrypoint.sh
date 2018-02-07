@@ -12,7 +12,9 @@ while getopts "u:c:n:d:p:" opt; do
   esac
 done
 
-curl --max-time 60 --retry 5 --retry-delay 10 --retry-max-time 30 --retry-connrefused ${URL}
+curl -s -o /dev/null --max-time 60 --retry 5 --retry-delay 10 --retry-max-time 30 --retry-connrefused ${URL}
+
+echo "ctfd is reachable, starting configuration."
 
 ./setupAdmin.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -c ${CTF} -e admin@${DOMAIN}
 ./uploadBackup.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -f backup.zip
