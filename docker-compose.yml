@@ -5,7 +5,7 @@ services:
     image: ctfd/ctfd:version-1.1.2
     restart: always
     ports:
-    - "${CTF_PORT:-80}:8000"
+    - "${SJCS_PORT:-80}:8000"
     environment:
       DATABASE_URL: mysql+pymysql://root:ctfd@db/ctfd
     links:
@@ -18,12 +18,12 @@ services:
       MYSQL_USER: ctfd
       MYSQL_PASSWORD: ctfd
     volumes:
-    - ${CTF_PATH:-./data}/mysql:/var/lib/mysql
+    - ${SJCS_PATH:-./data}/mysql:/var/lib/mysql
 
   bootstrapper:
     image: simbas/sjcs-bootstrapper:latest
-    command: -u http://ctfd:8000 -n ${CTF_USER:-admin} -p ${CTF_PASSWORD:-admin123} -c ${CTF_NAME:-JuiceCTF} -d ${CTF_DOMAIN:-mycompany.net}
+    command: -u http://ctfd:8000 -n ${SJCS_USER:-admin} -p ${SJCS_PASSWORD:-admin123} -c ${SJCS_TITLE:-JuiceCTF} -d ${SJCS_DOMAIN:-mycompany.net}
     links:
     - ctfd
     volumes:
-    - ${CTF_CHALS:-./bootstrapper/challenges}:/usr/local/bootstrapper/challenges
+    - ${SJCS_CHALS_FOLDER:-./bootstrapper/challenges}:/usr/local/bootstrapper/challenges

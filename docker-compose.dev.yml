@@ -6,4 +6,5 @@ services:
     - "/var/lib/mysql"
 
   bootstrapper:
+    image: bootstrapper:dev
     build: ./bootstrapper
