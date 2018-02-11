@@ -16,4 +16,4 @@ curl -s -o /dev/null -b cookies.txt -c cookies.txt -F "nonce=${TOKEN}" -F "name=
 
 TOKEN=$(curl -b cookies.txt --cookie-jar cookies.txt -s -L ${URL}/admin/config | pup '[name=nonce] attr{value}')
 curl -s -o /dev/null -b cookies.txt -c cookies.txt -F "nonce=${TOKEN}" -F "segments=challenges" -F "backup=@${FILE}" -H "Expect:" ${URL}/admin/import
-echo "backup has been uploaded."
+echo "challenge backup ${FILE} has been uploaded."

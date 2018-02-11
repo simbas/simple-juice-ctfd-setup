@@ -20,6 +20,8 @@ Paramaters (port, credentials, etc. check the `docker-compose.yml` file) are pas
 CTF_PORT=8080 CTF_PASSWORD=secretpassword docker-compose up
 ```
 
+Custom challenges (as CTFd backup) can be added in the `CTF_CHALS` folder.
+
 
 dev mode:
 
