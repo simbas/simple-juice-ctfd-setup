@@ -25,3 +25,5 @@ services:
     command: -u http://ctfd:8000 -n ${CTF_USER:-admin} -p ${CTF_PASSWORD:-admin123} -c ${CTF_NAME:-JuiceCTF} -d ${CTF_DOMAIN:-mycompany.net}
     links:
     - ctfd
+    volumes:
+    - ${CTF_CHALS:-./bootstrapper/challenges}:/usr/local/bootstrapper/challenges

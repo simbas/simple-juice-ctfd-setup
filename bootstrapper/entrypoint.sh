@@ -17,6 +17,10 @@ curl -s -o /dev/null --max-time 60 --retry 5 --retry-delay 10 --retry-max-time 3
 echo "ctfd is reachable, starting configuration."
 
 ./setupAdmin.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -c ${CTF} -e admin@${DOMAIN}
-./uploadBackup.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -f backup.zip
 ./addTeam.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -t blue -m blue@${DOMAIN} -c blue
 ./addTeam.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -t red -m red@${DOMAIN} -c red
+./uploadBackup.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -f juiceshop-chals.zip
+
+for filename in challenges/*.zip; do
+    ./uploadBackup.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -f ${filename}
+done
