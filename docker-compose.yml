@@ -5,7 +5,7 @@ services:
     image: ctfd/ctfd:version-1.1.2
     restart: always
     ports:
-    - "${SJCS_PORT:-80}:8000"
+    - "${SJCS_CTFD_PORT:-80}:8000"
     environment:
       DATABASE_URL: mysql+pymysql://root:ctfd@db/ctfd
     links:
@@ -27,3 +27,8 @@ services:
     - ctfd
     volumes:
     - ${SJCS_CHALS_FOLDER:-./bootstrapper/challenges}:/usr/local/bootstrapper/challenges
+
+  scripts:
+      image: simbas/sjcs-scripts:latest
+    ports:
+    - "${SJCS_SCRIPTS_PORT:-81}:80"
