@@ -9,6 +9,6 @@ services:
     image: bootstrapper:dev
     build: ./bootstrapper
 
-  scripts:
-    image: scripts:dev
-    build: ./scripts
+  web:
+    image: web:dev
+    build: ./web
