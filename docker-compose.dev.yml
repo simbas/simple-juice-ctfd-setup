@@ -8,3 +8,7 @@ services:
   bootstrapper:
     image: bootstrapper:dev
     build: ./bootstrapper
+
+  scripts:
+    image: scripts:dev
+    build: ./scripts
