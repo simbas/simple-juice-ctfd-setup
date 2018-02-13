@@ -28,7 +28,13 @@ services:
     volumes:
     - ${SJCS_CHALS_FOLDER:-./bootstrapper/challenges}:/usr/local/bootstrapper/challenges
 
-  scripts:
-      image: simbas/sjcs-scripts:latest
+  web:
+    image: simbas/sjcs-web:latest
     ports:
-    - "${SJCS_SCRIPTS_PORT:-81}:80"
+    - "${SJCS_WEB_PORT:-81}:8080"
+    environment:
+      MARKDOWN_FILE: "${SJCS_SLIDES_FILE:-index.md}"
+      THEME: "${SJCS_SLIDES_THEME:-blood}"
+      HIGHLIGHT_THEME: "${SJCS_SLIDES_HL_THEME:-darcula}"
+    volumes:
+    - ${SJCS_SLIDES_FOLDER:-./web/slides}:/usr/local/web/slides

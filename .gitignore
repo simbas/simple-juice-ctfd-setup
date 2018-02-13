@@ -1,3 +1,7 @@
 /data
 /bootstrapper/challenges/*.zip
+/web/slides/*.md
+/web/slides/*.json
+/web/slides/*.css
+/web/slides/*.jpg
 .DS_Store
