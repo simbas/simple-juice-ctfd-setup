@@ -22,7 +22,7 @@ services:
 
   bootstrapper:
     image: simbas/sjcs-bootstrapper:latest
-    command: -u http://ctfd:8000 -n ${SJCS_USER:-admin} -p ${SJCS_PASSWORD:-admin123} -c ${SJCS_TITLE:-JuiceCTF} -d ${SJCS_DOMAIN:-mycompany.net}
+    command: -u http://ctfd:8000 -n ${SJCS_USER:-admin} -p ${SJCS_PASSWORD:-admin123} -c ${SJCS_TITLE:-JuiceCTF} -d ${SJCS_DOMAIN:-mycompany.net} -t ${SJCS_TEAMS:-red,blue}
     links:
     - ctfd
     volumes:

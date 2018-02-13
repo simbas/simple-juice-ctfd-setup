@@ -28,6 +28,7 @@ SJCS_CTFD_PORT=8080 SJCS_PASSWORD=secretpassword docker-compose up
 | `SJCS_WEB_PORT`        | `81`                        | The mapped port with the web container port                 |
 | `SJCS_PATH`            | `./data`                    | The path on the filesystem where the database will be store |
 | `SJCS_USER`            | `admin`                     | The username of the CTFd admin                              |
+| `SJCS_TEAMS`           | `red,blue`                  | The teams to create (separated by `,`)                      |
 | `SJCS_PASSWORD`        | `admin123`                  | The password of the CTFd admin                              |
 | `SJCS_TITLE`           | `JuiceCTF`                  | The CTF name for CTFd                                       |
 | `SJCS_CHALS_FOLDER`    | `./bootstrapper/challenges` | The path to the folder of custom zipped challenges backup   |
