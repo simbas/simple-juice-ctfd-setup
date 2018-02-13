@@ -7,8 +7,8 @@ echo "Installing docker..."
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 echo 'deb https://download.docker.com/linux/debian stretch stable' > /etc/apt/sources.list.d/docker.list
 apt-get update
-apt-get remove docker docker-engine docker.io
-apt-get install docker-ce
+apt-get remove -y docker docker-engine docker.io
+apt-get install -y docker-ce
 docker pull bkimminich/juice-shop:latest
 
 echo "to run the juice shop please use the following command:"
