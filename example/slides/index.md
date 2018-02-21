@@ -24,25 +24,6 @@ Kali Linux has over 600 preinstalled penetration-testing programs, including Arm
 
 ---
 
-### Top 10
-
- * Injection
- * Broken Authentication
- * Sensitive Data Exposure
- * XML External Entities
- * Broken Access Control
- * Security Misconfiguration
- * Cross-site Scripting (XSS)
- * Insecure Deserialization
- * Using components with Known Vulnerabilities
- * Insufficient Logging & Monitoring
-
-And not to forget:
- * Cross-Site Request Forgery
- * Invalidated Redirects and Forwards
-
----
-
 ### Injection
 
 When we use user-supplied data in a query, command, interpreter, etc.
@@ -128,15 +109,6 @@ Attacks:
 
 ---
 
-### Security Misconfiguration
-
-When we misconfigure a security component at any level of an application stack, including the network services, platform, web server, application server, database, frameworks, custom code, and pre-installed virtual machines, containers, or storage.
-
-Attacks:
- * The attacker discovers they can simply list directories. The attacker finds and downloads the compiled Java classes, which they decompile and reverse engineer to view the code. The attacker then finds a serious access control flaw in the application.
-
----
-
 ### Cross-Site Scripting
 
 When we forget to escape an untrusted source of data.
@@ -161,22 +133,39 @@ Attacks:
 
 ---
 
-### Insecure Deserialization
+### OWASP Top 10
 
-When we accept serialized objects from untrusted sources.
+ * Injection
+ * Broken Authentication
+ * Sensitive Data Exposure
+ * XML External Entities
+ * Broken Access Control
+ * Security Misconfiguration
+ * Cross-site Scripting (XSS)
+ * Insecure Deserialization
+ * Using components with Known Vulnerabilities
+ * Insufficient Logging & Monitoring
 
-Attacks:
- * The attacker notice serialized java objects in request/response (R00 signature) and use JavaSerialKiller tool to execute code on the application server.
+And not to forget:
+ * Cross-Site Request Forgery
+ * Invalidated Redirects and Forwards
 
 ---
 
-### Using Components with Known Vulnerabilities
+### Juice shop
 
-There are automated tools to help attackers find unpatched or misconfigured systems. For example, the Shodan IoT search engine can help you find devices that still suffer from
-the Heartbleed vulnerability (OpenSSL security bug) that was patched in April 2014.
+OWASP Juice Shop is an intentionally insecure webapp for security trainings written entirely in JavaScript which encompasses the entire OWASP Top Ten and other severe security flaws.
 
 ---
 
-### Insufficient Logging & Monitoring
+### CTF
 
-Most successful attacks start with vulnerability probing. Allowing such probes to continue can raise the likelihood of successful exploit to nearly 100%.
+Capture the Flag is a special kind of information security competitions:
+ * In Attack-defence CTFs, every team has own network with vulnarable services. Your team has time for patching your services and developing exploits usually. So, then organizers connects participants of competition and the wargame starts! You should protect own services for defence points and hack opponents for attack points. 
+ * Jeopardy-style CTFs has a couple of questions (tasks) in range of categories. Team can gain some points for every solved task. More points for more complicated tasks usually. Then the game time is over sum of points shows you a CTF winer.
+
+---
+
+### CTFd
+
+CTFd is a Capture The Flag framework. It comes with everything you need to run a CTF and it's easy to customize with plugins and themes.

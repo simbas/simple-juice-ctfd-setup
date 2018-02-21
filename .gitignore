@@ -1,4 +1,5 @@
 /data
+/example/data
 /bootstrapper/challenges/*.zip
 /web/slides/*.md
 /web/slides/*.json

@@ -13,7 +13,7 @@ while getopts "u:c:n:d:p:t:" opt; do
   esac
 done
 
-curl -s -o /dev/null --max-time 60 --retry 5 --retry-delay 10 --retry-max-time 30 --retry-connrefused ${URL}
+curl -s -o /dev/null --retry 10 --retry-delay 10 --retry-max-time 30 --retry-connrefused ${URL}
 
 echo "ctfd is reachable, starting configuration."
 
