@@ -6,6 +6,9 @@ echo "Installing docker..."
 
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 echo 'deb https://download.docker.com/linux/debian stretch stable' > /etc/apt/sources.list.d/docker.list
+
+sed -i 's|http:|https:|g' /etc/apt/sources.list
+
 apt-get update
 apt-get remove -y docker docker-engine docker.io
 apt-get install -y docker-ce
