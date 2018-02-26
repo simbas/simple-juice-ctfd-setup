@@ -8,38 +8,41 @@ curl -fsSL http://<the server ip>:81/kali-setup.sh | sh
 
 ### Hacking
 
-Hacking is unauthorized intrusion into a computer or a network. The person engaged in hacking activities is generally referred to as a hacker. This hacker may alter system or security features to accomplish a goal that differs from the original purpose of the system.
+Hacking is an unauthorized intrusion into a computer or an information system. The malicious hacker may alter system or security features to accomplish a goal that differs from the original purpose of the system.
 
 ### Ethical hacking
 
-Ethical hacking refers to the act of locating weaknesses and vulnerabilities of computer and information systems by duplicating the intent and actions of malicious hackers.
+Ethical hacking refers to the act of locating weaknesses and vulnerabilities of computer and information systems by duplicating the actions of malicious hackers.
+
+---
+
+### Penetration testing
+
+Penetration Testing (pentest) is designed to find the maxium of vulnerabilities. The tester attempts to exploit the vulnerabilities to ensure they are not false positives.
+
+### Red team testing
+
+Red team testing is similar to a pentest in many ways but is more targeted. Red team tests are testing the organization capabilities. The red team will try to get in and access sensitive information in any way possible, as quietly as possible.
 
 ---
 
 ### Kali Linux
 
-Kali Linux is a Debian-derived Linux distribution designed for digital forensics and penetration testing (pentest).
+Kali Linux is a Debian-derived Linux distribution designed for digital forensics and pentests.
 
-Kali Linux has over 600 preinstalled penetration-testing programs, including Armitage (a graphical cyber attack management tool), Nmap (a port scanner), Wireshark (a packet analyzer), John the Ripper password cracker, Aircrack-ng (a software suite for penetration-testing wireless LANs), Burp suite and OWASP ZAP web application security scanners. Kali Linux can run natively when installed on a computer's hard disk, can be booted from a live CD or live USB, or it can run within a virtual machine. It is a supported platform of the Metasploit Project's Metasploit Framework, a tool for developing and executing security exploits.
-
----
-
-### OWASP Top 10
-
- * Injection
- * Broken Authentication
- * Sensitive Data Exposure
- * XML External Entities
- * Broken Access Control
- * Security Misconfiguration
- * Cross-site Scripting (XSS)
- * Insecure Deserialization
- * Using components with Known Vulnerabilities
- * Insufficient Logging & Monitoring
+It is loaded with more than 600 pentest programs, for instance:
+ * nmap, a port scanner
+ * wireshark, a network packet analyzer
+ * John the ripper, a password cracker
+ * Aircrack-ng, a wifi pentester
 
 ---
 
-### Injection
+### Common web application vulnerabilities
+
+----
+
+#### Injection
 
 When we use user-supplied data in a query, command, interpreter, etc.
 
@@ -56,9 +59,9 @@ Query HQLQuery = session.createQuery("FROM accounts WHERE custID='"
 Attack:
 > http://example.com/app/accountView?id='or '1'='1
 
----
+----
 
-### Broken Authentication
+#### Broken Authentication
 
 When we don't correctly implement authentication flow (technically and/or functionnaly).
 
@@ -66,27 +69,10 @@ Vulnerabilities:
  * Permits brute force, credential stuffing.
  * Permits default, well-known passwords: 'admin/admin', 'admin/admin123', etc.
  * Uses weak credential recovery/forgotten-password processes.
- * Does not properly invalidate session IDs, sessions or tokens during logout or inactivity.
 
----
+----
 
-### Sensitive Data Exposure
-
-When we don't properly encrypt sensitive data during transit and at rest.
-
-Vulnerabilities:
- * HTTP, SMTP, FTP.
- * Sensitive data and/or backups are stored in clear text.
- * Old or weak cryptographic algorithms are used.
- * Default cryptographic keys are used.
- * Certificates are not valid.
-
-Attacks:
- * The password database uses simple hashes to store everyone's passwords. A file upload flaw allows attacker to retrieve the password database. The attacker uses rainbow table to get passwords.
-
----
-
-### XML External Entities
+#### XML External Entities
 
 When we accept XML input or XML uploads or we use user-supplied data in XML.
 
@@ -111,9 +97,9 @@ Attacks:
 <lolz>&lol9;</lolz>
 ```
 
----
+----
 
-### Broken Access Control
+#### Broken Access Control
 
 When we don't check that a user has the privileges and control to access the requested data.
 
@@ -122,9 +108,9 @@ Attacks:
 > http://myawesomeapp.net/account/234/edit
 > http://myawesomeapp.net/account/356/edit
 
----
+----
 
-### Cross-Site Scripting
+#### Cross-Site Scripting
 
 When we forget to escape an untrusted source of data.
 
@@ -146,25 +132,43 @@ Attacks:
 
 This attack causes the victim’s session ID to be sent to the attacker’s website, allowing the attacker to hijack the user’s current session.
 
+----
+
+More information about web application vulnerabilities with [OWASP TOP 10](https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf).
+
+----
+
+#### CVE
+
+A CVE is a common name for a single security vulnerability so that we can identify and talk about issues sanely (e.g. "that OpenSSL vulnerability, from like 2009, the DoS one" vs. "CVE-2009-3555"). CVE allows multiple vendors, products, and customers to properly track security vulnerabilities and make sure they are dealt with.
+
+ex: [CVE-2017-1653](https://duckduckgo.com/?q=CVE-2017-1653)
+
 ---
 
-### Juice shop
+### The scenario
 
-OWASP Juice Shop is an intentionally insecure webapp for security trainings written entirely in JavaScript which encompasses the entire OWASP Top Ten and other severe security flaws.
+Your new client is a brand new healthcare software editor and it wants to comprise its well-etablished competitor: `Medical Software`. Your client asks two different teams to do the "dirty work", but only the most efficient will earn the cryptomoney pride.
 
----
+Your team already tried a lot of remote attacks to gain access to the corporate network but everything failed, you decided to change your strategy.
 
-### CTF
+----
 
-Capture the Flag is a special kind of information security competitions:
- * In Attack-defence CTFs, every team has own network with vulnarable services. Your team has time for patching your services and developing exploits usually. So, then organizers connects participants of competition and the wargame starts! You should protect own services for defence points and hack opponents for attack points. 
- * Jeopardy-style CTFs has a couple of questions (tasks) in range of categories. Team can gain some points for every solved task. More points for more complicated tasks usually. Then the game time is over sum of points shows you a CTF winer.
+You made a fake profile on a famous professional social network.
+
+----
+
+![profile](profile.png)
+
+----
+
+You discovered that a lot of Medical Software employees are sharing `Juice Shop` pages and promotions over the social network, you think it could be a good vector of attack.
 
 ---
 
 ### CTFd
 
-CTFd is a Capture The Flag framework. It comes with everything you need to run a CTF and it's easy to customize with plugins and themes.
+To track the team progresses, your client set up a CTFd server, it is a Capture The Flag framework.
 
 ---
 
@@ -183,7 +187,12 @@ nikto -host http://localhost:3000
 `sqlmap` is an automatic SQL injection tool.
 
 ```
+# extract critical information about the database
 sqlmap --ignore-code=401 --url=http://localhost:3000/rest/user/login --data='{"email":"*", "password":"*"}' --level=5 --risk=3
+
+# list the tables
 sqlmap --ignore-code=401 --url=http://localhost:3000/rest/user/login --data='{"email":"*", "password":"*"}' --level=3 --risk=3 --tables --dbms=SQLite
+
+# dump the Users table
 sqlmap --ignore-code=401 --url=http://localhost:3000/rest/user/login --data='{"email":"*", "password":"*"}' --level=5 --risk=3 --dump -T Users --dbms=SQLite
 ```
