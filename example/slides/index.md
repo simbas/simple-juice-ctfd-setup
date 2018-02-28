@@ -196,3 +196,52 @@ sqlmap --ignore-code=401 --url=http://localhost:3000/rest/user/login --data='{"e
 # dump the Users table
 sqlmap --ignore-code=401 --url=http://localhost:3000/rest/user/login --data='{"email":"*", "password":"*"}' --level=5 --risk=3 --dump -T Users --dbms=SQLite
 ```
+
+---
+
+## To trust or not to trust
+
+----
+
+> Can I trust that value and use it to build a SQL request?
+
+No you can't!
+
+Never build a SQL request dynamically, always use named parameters instead.
+
+```java
+// Don't
+Query unsafeHQLQuery = session.createQuery("from Inventory where productID='"+userSuppliedParameter+"'");
+
+// Do
+Query safeHQLQuery = session.createQuery("from Inventory where productID=:productid");
+safeHQLQuery.setParameter("productid", userSuppliedParameter);
+```
+
+[SQL Injection Prevention Cheat Sheet](https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet)
+
+----
+
+> Can I trust that value and display its content in the html document?
+
+No you can't!
+
+Always sanitize and escape the value before displaying it. Check the possibilities of your frameworks (`ngSanitize`, `DomSanitizer`, `OWASP ESAPI`, etc.).
+
+[XSS Prevention Cheat Sheet](https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet)
+
+----
+
+> Can I trust my user and respond the document he/she is requesting?
+
+No you can't!
+
+Always check that the user is authorized to access the document.
+
+----
+
+> Can I trust that USB key I found in the parking lot earlier and plug it in my computer?
+
+No you can't!
+
+Don't plug an USB key you don't know. One tip to prevent USB infection is to lock your screen before pluging the USB key.
