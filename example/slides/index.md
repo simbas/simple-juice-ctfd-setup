@@ -1,7 +1,7 @@
 ## Welcome !
 
 ```shell
-curl -fsSL http://<the server ip>:81/kali-setup.sh | sh
+curl -fsSL http://<the server ip>/install/kali.sh | sh
 ```
 
 ---

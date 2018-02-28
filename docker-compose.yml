@@ -1,15 +1,23 @@
 version: '2.1'
 
 services:
+  traefik:
+    image: traefik
+    command: --docker
+    ports:
+    - "${SJCS_PORT:-80}:80"
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+
   ctfd:
     image: ctfd/ctfd:version-1.1.2
     restart: always
-    ports:
-    - "${SJCS_CTFD_PORT:-80}:8000"
     environment:
       DATABASE_URL: mysql+pymysql://root:ctfd@db/ctfd
     links:
     - db
+    labels:
+    - "traefik.frontend.rule=PathPrefixStrip:/"
 
   db:
     image: mariadb:10.2
@@ -28,13 +36,14 @@ services:
     volumes:
     - ${SJCS_CHALS_FOLDER:-./bootstrapper/challenges}:/usr/local/bootstrapper/challenges
 
-  web:
-    image: simbas/sjcs-web:latest
-    ports:
-    - "${SJCS_WEB_PORT:-81}:8080"
+  etc:
+    image: simbas/sjcs-etc:latest
     environment:
       MARKDOWN_FILE: "${SJCS_SLIDES_FILE:-index.md}"
       THEME: "${SJCS_SLIDES_THEME:-blood}"
       HIGHLIGHT_THEME: "${SJCS_SLIDES_HL_THEME:-darcula}"
     volumes:
     - ${SJCS_SLIDES_FOLDER:-./web/slides}:/usr/local/web/slides
+    labels:
+    - "traefik.frontend.rule=PathPrefixStrip:/slides,/install"
+    - "traefik.port=8080"
