@@ -1,29 +1,42 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+entrypoint() {
+    local url=$1
+    local ctf=$2
+    local name=$3
+    local domain=$4
+    local password=$5
+    local teams=$6
 
-while getopts "u:c:n:d:p:t:" opt; do
-  case $opt in
-    u) URL="$OPTARG";;
-    c) CTF="$OPTARG";;
-    n) NAME="$OPTARG";;
-    d) DOMAIN="$OPTARG";;
-    p) PASSWORD="$OPTARG";;
-    t) TEAMS="$OPTARG";;
-  esac
-done
 
-curl -s -o /dev/null --retry 10 --retry-delay 10 --retry-max-time 30 --retry-connrefused ${URL}
+    curl -s -o /dev/null --retry 10 --retry-delay 10 --retry-max-time 30 --retry-connrefused "${url}"
 
-echo "ctfd is reachable, starting configuration."
+    echo "ctfd is reachable, starting configuration."
 
-./setupAdmin.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -c ${CTF} -e admin@${DOMAIN}
+    ./setupAdmin.sh "${url}" "${ctf}" "${name}" "admin@${domain}" "${password}"
 
-for team in $(echo $TEAMS | tr "," "\n"); do
-    ./addTeam.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -t ${team} -m ${team}@${DOMAIN} -c ${team}
-done
+    for team in $(echo "${teams}" | tr "," "\n"); do
+        ./addTeam.sh "${url}" "${name}" "${team}" "${team}@${domain}" "${team}" "${password}"
+    done
 
-./uploadBackup.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -f juiceshop-chals.zip
-for filename in challenges/*.zip; do
-    ./uploadBackup.sh -u ${URL} -n ${NAME} -p ${PASSWORD} -f ${filename}
-done
+    ./uploadBackup.sh "${url}" "${name}" "${password}" juiceshop-chals.zip
+    for filename in challenges/*.zip; do
+        ./uploadBackup.sh "${url}" "${name}" "${password}" "${filename}"
+    done
+}
+
+if [[ "${BASH_SOURCE[0]}" = "$0" ]]; then
+    while getopts "u:c:n:d:p:t:" opt; do
+        case $opt in
+            u) url="$OPTARG";;
+            c) ctf="$OPTARG";;
+            n) name="$OPTARG";;
+            d) domain="$OPTARG";;
+            p) password="$OPTARG";;
+            t) teams="$OPTARG";;
+        esac
+    done
+
+    entrypoint "${url}" "${ctf}" "${name}" "${domain}" "${password}" "${teams}"
+fi

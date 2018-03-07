@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+uploadBackup() {
+    local url=$1
+    local name=$2
+    local password=$3
+    local file=$4
 
-while getopts "u:n:f:p:" opt; do
-  case $opt in
-    u) URL="$OPTARG";;
-    n) NAME="$OPTARG";;
-    f) FILE="$OPTARG";;
-    p) PASSWORD="$OPTARG";;
-  esac
-done
+    local token=''
 
-TOKEN=$(curl -b cookies.txt --cookie-jar cookies.txt -s -L ${URL}/login | pup '[name=nonce] attr{value}')
-curl -s -o /dev/null -b cookies.txt -c cookies.txt -F "nonce=${TOKEN}" -F "name=${NAME}" -F "password=${PASSWORD}" -H "Expect:" ${URL}/login
+    token=$(curl -b cookies.txt --cookie-jar cookies.txt -s -L "${url}/login" | pup '[name=nonce] attr{value}')
+    curl -s -o /dev/null -b cookies.txt -c cookies.txt -F "nonce=${token}" -F "name=${name}" -F "password=${password}" -H "Expect:" "${url}/login"
 
-TOKEN=$(curl -b cookies.txt --cookie-jar cookies.txt -s -L ${URL}/admin/config | pup '[name=nonce] attr{value}')
-curl -s -o /dev/null -b cookies.txt -c cookies.txt -F "nonce=${TOKEN}" -F "segments=challenges" -F "backup=@${FILE}" -H "Expect:" ${URL}/admin/import
-echo "challenge backup ${FILE} has been uploaded."
+    token=$(curl -b cookies.txt --cookie-jar cookies.txt -s -L "${url}/admin/config" | pup '[name=nonce] attr{value}')
+    curl -s -o /dev/null -b cookies.txt -c cookies.txt -F "nonce=${token}" -F "segments=challenges" -F "backup=@${file}" -H "Expect:" "${url}/admin/import"
+    echo "challenge backup ${file} has been uploaded."
+}
+
+if [[ "${BASH_SOURCE[0]}" = "$0" ]]; then
+    uploadBackup "$1" "$2" "$3" "$4"
+fi
