@@ -8,7 +8,7 @@ curl -fsSL http://<the server ip>/install/kali.sh | sh
 
 ### Hacking
 
-Hacking is an unauthorized intrusion into a computer or an information system. The malicious hacker may alter system or security features to accomplish a goal that differs from the original purpose of the system.
+Hacking is an __unauthorized intrusion__ into a computer or an information system. The malicious hacker may alter system or security features to accomplish a goal that differs from the original purpose of the system.
 
 ### Ethical hacking
 
@@ -148,9 +148,9 @@ ex: [CVE-2017-1653](https://duckduckgo.com/?q=CVE-2017-1653)
 
 ### The scenario
 
-Your new client is a brand new healthcare software editor and it wants to comprise its well-etablished competitor: `Medical Software`. Your client asks two different teams to do the "dirty work", but only the most efficient will earn the cryptomoney pride.
+Your new client is a __brand new healthcare software editor__ and it wants to comprise its well-etablished competitor: `Medical Software`. Your client asks two different teams to do the "dirty work".
 
-Your team already tried a lot of remote attacks to gain access to the corporate network but everything failed, you decided to change your strategy.
+Both teams already tried a lot of remote attacks to gain access to the corporate network but everything failed, you decided to change your strategy.
 
 ----
 
@@ -196,6 +196,183 @@ sqlmap --ignore-code=401 --url=http://localhost:3000/rest/user/login --data='{"e
 # dump the Users table
 sqlmap --ignore-code=401 --url=http://localhost:3000/rest/user/login --data='{"email":"*", "password":"*"}' --level=5 --risk=3 --dump -T Users --dbms=SQLite
 ```
+
+---
+
+### AYBABTU
+
+The `juice shop` hack is successful, you discover where employees live based on `juice shop` database and you can guess which bus they use to commute.
+
+----
+
+![victim map](victim-map.png)
+
+----
+
+### Your stuff
+
+To gain access to the `Medical Software` facilities:
+ * PN532 (13.56MHz,HF access badges)
+ * Proxmark (13.56MHz,HF access badges / 125KHz,LF access badges)
+ * HackRF One (Remotes, cars, parkings, VHF)
+
+---
+
+### Congrat's
+
+You now have a `Medical Software` access badge clone in your hands.
+
+Soon you will penetrate in the facilities and install a backdoor in the company network.
+
+But for now you are going to prepare your malware and infection devices.
+
+---
+
+### Metasploit
+
+*Metasploit is the most used pentest __framework__.*
+
+Provides rich and full-featured __payloads__.
+
+Has a large community with tons of scripts.
+
+But one drawback, it has signature and __easy__ to detect.
+
+Easy to detect using basic framework, but hard when using AV Evasion technics.
+
+----
+
+### Payload
+
+In the world of malware, the term payload is used to describe what a virus, worm or Trojan is designed to do on a victim’s computer.
+
+----
+
+### Payloads
+
+In metasploit you have 3 payload kinds:
+ * Single payloads
+ * Stagers payloads
+ * Stages payloads
+
+----
+
+### Singles payloads
+
+Singles are payloads that are __self-contained__ and completely __standalone__. A Single payload can be something as simple as adding a user to the target system or running `calc.exe`.
+
+These kinds of payloads are self-contained, so they can be caught with __non-metasploit__ handlers such as netcat.
+
+----
+
+### Stagers payloads
+
+Stagers setup a __network connection__ between the __attacker__ and __victim__ and are designed to be __small__ and __reliable__. It is difficult to always do both of these well so the result is multiple similar stagers. Metasploit will use the best one when it can and __fall back__ to a less-preferred one when necessary.
+
+----
+
+### Stages payloads
+
+Stages are payload components that are __downloaded by Stagers module__. The various payload stages provide __advanced features__ with no size limits such as __Meterpreter__, VNC Injection, and the iPhone ‘ipwn’ Shell.
+
+----
+
+### AV Evasion
+
+AV Evasion Frameworks:
+
+ * [VEIL (Shellcode injection)](https://www.veil-framework.com/)
+ * [Shellter (Windows only / Payload embedding / Stealth)](https://www.shellterproject.com/)
+
+Third-party libraries:
+
+ * Search: "github av evasion" / "github shellcode injection"
+ * Use recent repositories (< 1 year old)
+
+---
+
+### USB Infection
+
+USB Rubber Ducky (large scale hacking):
+
+ * Keystroke injection
+ * Data exfiltration
+ * Static behavior
+ * __Fast and discrete__
+
+USB Bash Bunny (elaborated attacks):
+
+ * Keystroke injection
+ * Data exfiltration
+ * MITM Network trusted device
+ * Slower and bigger than ducky
+ * __OS Detection__
+ * __Variable/Adaptative behavior__
+
+[differences between rubber ducky and bash bunny](https://forums.hak5.org/topic/40210-what-is-difference-of-rubber-ducky/)
+
+---
+
+You successfully infected two computers with the bash bunny that sent you an email with public ip adresses of __metasploit__ infected computers.
+
+---
+
+### MAILBOX ALERT
+
+You have two new mails:
+
+> Computer: DPBRAZOWSKI
+> IP: 172.20.10.6
+> PORT: 4001
+
+> Computer: DPALEVESQUE
+> IP: 172.20.10.7
+> PORT: 4001
+
+----
+
+Try to find something in that can be valuable:
+
+ * sensitive files
+ * compromising files
+ * screen/camera captures
+ * audio from important meetings
+
+----
+
+### Connect to the victim
+
+```bash
+$ msfconsole
+msf> use exploit/multi/handler
+msf exploit(handler)> set PAYLOAD windows/meterpreter/bind_tcp
+msf exploit(handler)> set RHOST 172.20.10.7
+msf exploit(handler)> set LPORT 4001
+msf exploit(handler)> exploit
+meterpreter> help
+```
+
+---
+
+### Job is done
+
+You have extracted the source code of `Medical Software` main product and discover a vulnerability in the application.
+
+Moreover you also get credentials to connect to every `Medical Software` client network.
+
+You report your discoveries and take the money.
+
+----
+
+Your client start an agressive marketing campaign based on new ergonomics, modernity and __security__.
+
+Six months later they post tons of ultra-sentive data on a russian hacking forum:
+ * social security numbers
+ * addresses
+ * healthcare documents
+ * etc.
+
+`Medical Software` filed for bankruptcy in less than a year.
 
 ---
 
