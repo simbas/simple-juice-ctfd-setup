@@ -1,0 +1,8 @@
+{
+  "name": "bootstrapper",
+  "version": "0.0.1",
+  "dependencies": {
+    "juice-shop-ctf-cli": "4.0.0",
+    "node-zip": "1.1"
+  }
+}

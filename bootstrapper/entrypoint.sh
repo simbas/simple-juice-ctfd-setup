@@ -9,6 +9,11 @@ entrypoint() {
     local password=$5
     local teams=$6
 
+    curl -s -o /dev/null --retry 10 --retry-delay 10 --retry-max-time 30 --retry-connrefused "http://juice-shop:3000"
+
+    echo "juice-shop is ready, starting challenges generation."
+
+    ./generate.js
 
     curl -s -o /dev/null --retry 10 --retry-delay 10 --retry-max-time 30 --retry-connrefused "${url}"
 
@@ -20,7 +25,7 @@ entrypoint() {
         ./addTeam.sh "${url}" "${name}" "${team}" "${team}@${domain}" "${team}" "${password}"
     done
 
-    ./uploadBackup.sh "${url}" "${name}" "${password}" juiceshop-chals.zip
+    ./uploadBackup.sh "${url}" "${name}" "${password}" juice-shop-challenges.zip
     for filename in challenges/*.zip; do
         ./uploadBackup.sh "${url}" "${name}" "${password}" "${filename}"
     done
