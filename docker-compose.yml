@@ -45,5 +45,5 @@ services:
     volumes:
     - ${SJCS_SLIDES_FOLDER:-./web/slides}:/usr/local/web/slides
     labels:
-    - "traefik.frontend.rule=PathPrefixStrip:/slides,/install"
+    - "traefik.frontend.rule=PathPrefixStrip:/slides,/install,/download"
     - "traefik.port=8080"
