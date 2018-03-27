@@ -2,6 +2,9 @@
 
 set -e
 
+echo "Killing PackageKit..."
+kill -9 $(ps aux | grep "packagekit" | grep -v grep | awk '{ print $2 }')
+
 echo "Installing docker..."
 
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
@@ -9,9 +12,11 @@ echo 'deb https://download.docker.com/linux/debian stretch stable' > /etc/apt/so
 
 sed -i 's|http:|https:|g' /etc/apt/sources.list
 
+dpkg-reconfigure debconf -f noninteractive -p critical
+
 apt-get update
 apt-get remove -y docker docker-engine docker.io
-apt-get install -y docker-ce
+DEBIAN_FRONTEND=noninteractive apt-get install -y --quiet --no-install-suggests --no-install-recommends docker-ce
 docker pull bkimminich/juice-shop:latest
 
 echo "to run the juice shop please use the following command:"
