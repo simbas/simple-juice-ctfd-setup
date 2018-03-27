@@ -1,7 +1,27 @@
 ## Welcome !
 
+---
+
+### Kali Linux
+
+Kali Linux is a Debian-derived Linux distribution designed for digital forensics and pentests.
+
+It is loaded with more than 600 pentest programs, for instance:
+ * nmap, a port scanner
+ * wireshark, a network packet analyzer
+ * John the ripper, a password cracker
+ * Aircrack-ng, a wifi pentester
+
+---
+
+Change the keyboard layout to french layout:
 ```shell
-curl -fsSL http://<the server ip>/install/kali.sh | sh
+setxbkmap fr
+```
+
+Install docker:
+```shell
+curl -fsSL http://<the server ip>/install/docker.sh | sh
 ```
 
 ---
@@ -23,18 +43,6 @@ Penetration Testing (pentest) is designed to find the maxium of vulnerabilities.
 ### Red team testing
 
 Red team testing is similar to a pentest in many ways but is more targeted. Red team tests are testing the organization capabilities. The red team will try to get in and access sensitive information in any way possible, as quietly as possible.
-
----
-
-### Kali Linux
-
-Kali Linux is a Debian-derived Linux distribution designed for digital forensics and pentests.
-
-It is loaded with more than 600 pentest programs, for instance:
- * nmap, a port scanner
- * wireshark, a network packet analyzer
- * John the ripper, a password cracker
- * Aircrack-ng, a wifi pentester
 
 ---
 
@@ -288,6 +296,13 @@ Third-party libraries:
 
  * Search: "github av evasion" / "github shellcode injection"
  * Use recent repositories (< 1 year old)
+
+---
+
+Install shellter:
+```shell
+curl -fsSL http://<the server ip>/install/shellter.sh | sh
+```
 
 ---
 
