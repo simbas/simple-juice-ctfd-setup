@@ -6,3 +6,4 @@
 /web/slides/*.css
 /web/slides/*.jpg
 .DS_Store
+.idea
