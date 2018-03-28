@@ -38,7 +38,7 @@ SJCS_PORT=8080 SJCS_PASSWORD=secretpassword docker-compose up
 
 Install docker and pull the `juice-shop` image on kali linux:
 ```shell
-curl -fsSL http://<the server ip>/install/kali-setup.sh | sh
+curl -fsSL http://<the server ip>/install/docker.sh | sh
 ```
 
 ### Development

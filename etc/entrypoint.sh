@@ -6,6 +6,7 @@ if [ -f "./slides/${MARKDOWN_FILE}" ]; then
     cp ./slides/*.jpg ./public/_assets/slides/
 fi
 
-cp scripts/kali.sh public/
+cp scripts/docker.sh public/
+cp scripts/shellter.sh public/
 
 http-server
