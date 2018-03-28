@@ -7,6 +7,7 @@ WORKDIR /usr/local/web/
 
 COPY docker.sh /usr/local/web/scripts/docker.sh
 COPY shellter.sh /usr/local/web/scripts/shellter.sh
+COPY winscp.sh /usr/local/web/scripts/winscp.sh
 COPY entrypoint.sh /usr/local/web/entrypoint.sh
 RUN shellcheck *.sh
 

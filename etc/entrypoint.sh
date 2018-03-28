@@ -8,5 +8,6 @@ fi
 
 cp scripts/docker.sh public/
 cp scripts/shellter.sh public/
+cp scripts/winscp.sh public/
 
 http-server

